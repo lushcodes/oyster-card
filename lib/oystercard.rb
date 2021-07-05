@@ -3,7 +3,7 @@ class Oystercard
   MAXIMUM_BALANCE = 90
   MINIMUM_BALANCE = 1
   attr_reader :balance
-
+  attr_reader :deduct
   def initialize
     @balance = 0
     @card_state = false
@@ -30,7 +30,9 @@ class Oystercard
   end
 
   def touch_out
+    deduct(MINIMUM_BALANCE)
     @card_state = false
-    @balance -= MINIMUM_BALANCE
   end
+
+  
 end
