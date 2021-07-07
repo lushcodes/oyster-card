@@ -3,6 +3,7 @@ require 'oystercard'
 describe Oystercard do
   let(:oystercard) { Oystercard.new }
   let(:entry_station) { double :entry_station }
+  let(:exit_station) { double :exit_station }
   it 'should have an initial balance of 0' do
     expect(oystercard.balance).to eq(0)
   end
@@ -48,15 +49,15 @@ describe Oystercard do
     it 'can touch out' do
       oystercard.top_up(Oystercard::MINIMUM_BALANCE)
       oystercard.touch_in(entry_station)
-      oystercard.touch_out
-      expect(oystercard).not_to be_in_journey
+      oystercard.touch_out(exit_station)
+      expect(oystercard.exit_station).to eq(exit_station)
     end
 
     it 'can deduct funds when touched out' do
-      expect{ oystercard.touch_out }.to change { oystercard.balance }.by -Oystercard::MINIMUM_BALANCE
+      expect{ oystercard.touch_out(exit_station) }.to change { oystercard.balance }.by -Oystercard::MINIMUM_BALANCE
   end
   it 'forgets station when touched out' do
-    expect(oystercard.touch_out).to eq(nil)
+    expect(oystercard.touch_out(exit_station)).to eq(nil)
 end
 end
 end
