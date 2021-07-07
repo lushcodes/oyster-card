@@ -1,4 +1,6 @@
 require 'oystercard'
+require 'journey'
+require 'station'
 
 describe Oystercard do
   let(:oystercard) { Oystercard.new }
