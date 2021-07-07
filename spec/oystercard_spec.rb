@@ -8,10 +8,6 @@ describe Oystercard do
     expect(oystercard.balance).to eq(0)
   end
 
-  it 'is initially not in a jounrey' do
-    expect(oystercard).not_to be_in_journey
-  end
-
   describe '#top_up' do
     it { is_expected.to respond_to(:top_up).with(1).argument }
 
@@ -55,9 +51,13 @@ describe Oystercard do
 
     it 'can deduct funds when touched out' do
       expect{ oystercard.touch_out(exit_station) }.to change { oystercard.balance }.by -Oystercard::MINIMUM_BALANCE
+    end
+
+    it 'forgets station when touched out' do
+      expect(oystercard.touch_out(exit_station)).to eq(nil)
+    end
+
+   
+
   end
-  it 'forgets station when touched out' do
-    expect(oystercard.touch_out(exit_station)).to eq(nil)
-end
-end
 end
