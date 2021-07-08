@@ -1,3 +1,6 @@
+require_relative 'journey'
+require_relative 'station'
+
 class Oystercard
 
   MAXIMUM_BALANCE = 90
@@ -24,6 +27,8 @@ class Oystercard
     fail "Insufficient balance to touch in" if balance < 1
     @card_state = true
     @entry_station = entry_station
+   
+
   
   end
 
@@ -31,7 +36,7 @@ class Oystercard
     deduct(MINIMUM_BALANCE)
     @card_state = false
     @exit_station = exit_station
-    @journey_history << { entry_station: entry_station, exit_station: exit_station }
+    @journey_history << Journey.new
     @entry_station = nil
   end
 
