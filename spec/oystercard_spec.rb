@@ -1,6 +1,4 @@
 require 'oystercard'
-require 'journey'
-require 'station'
 
 describe Oystercard do
   let(:oystercard) { Oystercard.new }
@@ -8,6 +6,10 @@ describe Oystercard do
   let(:exit_station) { double :exit_station }
   it 'should have an initial balance of 0' do
     expect(oystercard.balance).to eq(0)
+  end
+
+  it 'is initially not in a jounrey' do
+    expect(oystercard).not_to be_in_journey
   end
 
   describe '#top_up' do
@@ -53,13 +55,9 @@ describe Oystercard do
 
     it 'can deduct funds when touched out' do
       expect{ oystercard.touch_out(exit_station) }.to change { oystercard.balance }.by -Oystercard::MINIMUM_BALANCE
-    end
-
-    it 'forgets station when touched out' do
-      expect(oystercard.touch_out(exit_station)).to eq(nil)
-    end
-
-   
-
   end
+  it 'forgets station when touched out' do
+    expect(oystercard.touch_out(exit_station)).to eq(nil)
+end
+end
 end

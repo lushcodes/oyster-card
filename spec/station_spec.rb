@@ -1,6 +1,4 @@
  require 'station'
- require 'oystercard'
- require 'journey'
 
 
  describe Station do
