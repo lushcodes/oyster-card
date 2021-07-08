@@ -56,6 +56,7 @@ describe Oystercard do
     it 'can deduct funds when touched out' do
       expect{ oystercard.touch_out(exit_station) }.to change { oystercard.balance }.by -Oystercard::MINIMUM_BALANCE
   end
+
   it 'forgets station when touched out' do
     expect(oystercard.touch_out(exit_station)).to eq(nil)
 end

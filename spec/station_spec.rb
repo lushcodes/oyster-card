@@ -1,8 +1,8 @@
  require 'station'
 
-
  describe Station do
   let(:station) { Station.new("name", 0) }
+
     it 'has a name by default' do
       expect(station.name).to eq("name")
     end
