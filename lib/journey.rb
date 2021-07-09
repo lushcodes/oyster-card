@@ -12,7 +12,7 @@ class Journey
   end
 
   def complete?
-    @completed = false
+    !!@completed
   end
 
   def fare
@@ -22,6 +22,7 @@ class Journey
   def finish(exit_station)
   @exit_station
   @fare = MIN_FARE
+  @completed = true
   self
   end
 end
